@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" });
 
 mongoose.connect(
   `mongodb+srv://${process.env.DB_USER}:${processces.env.DB_PASS}@cluster0.ihu46.mongodb.net/blogDB?retryWrites=true&w=majority`,

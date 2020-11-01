@@ -35,6 +35,7 @@ app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   PostModel.find({}, (err, result) => {
+    console.log(result);
     if (!err) {
       res.render("home", {
         homeStartingContent: homeStartingContent,
@@ -58,7 +59,7 @@ app.get("/compose", (req, res) => {
 
 app.post("/compose", (req, res) => {
   const post = new PostModel({
-    title: _.lowerCase(req.params.title),
+    title: _.lowerCase(req.body.title),
     post: req.body.postBody,
   });
 
@@ -70,13 +71,21 @@ app.post("/compose", (req, res) => {
 app.get("/posts/:title", (req, res) => {
   const title = _.lowerCase(req.params.title);
 
-  PostModel.findOne({title: title}, (err, result)=>{
-    if(result){
-      res.render('post', {post: result})
-    }else{
-      res.redirect('/')
+  PostModel.findOne({ title: title }, (err, result) => {
+    if (result) {
+      res.render("post", { post: result });
+    } else {
+      res.redirect("/");
     }
-  })
+  });
+});
+
+app.post("/delete-post", (req, res) => {
+  PostModel.deleteOne({ title: req.body.button }, (err) => {
+    err ? console.log(err) : console.log("Succesfully deleted a post");
+
+    res.redirect("/");
+  });
 });
 
 app.listen(3000 || process.env.PORT, function () {

@@ -5,5 +5,14 @@
 
 <% listPost.forEach(el=> { %>
 <h3><%= el.title %></h3>
-<p><%= el.post.substring(0,100) +' ...'%> <a href="/posts/<%= el.title %> ">Read More</a></p>
+<p>
+  <%= el.post.substring(0,100) +' ...'%>
+  <a href="/posts/<%= el.title %> ">Read More</a>
+</p>
+
+<form action="/delete-post" method="POST">
+  <button type="submit" value="<%= el.title %>" name="button">
+    Delete Post
+  </button>
+</form>
 <%}); %> <%- include('partials/footer') -%>

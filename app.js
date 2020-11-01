@@ -5,7 +5,7 @@ const _ = require("lodash");
 const env = require("dotenv").config();
 
 mongoose.connect(
-  `mongodb+srv://${proces.env.DB_USER}:${proces.env.DB_PASS}@cluster0.ihu46.mongodb.net/blogDB?retryWrites=true&w=majority`,
+  `mongodb+srv://${process.env.DB_USER}:${processces.env.DB_PASS}@cluster0.ihu46.mongodb.net/blogDB?retryWrites=true&w=majority`,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) =>
     err ? console.log(err) : console.log("Succesfully running mongodb...")
